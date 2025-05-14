@@ -1,22 +1,19 @@
-import React from 'react';
-import ReactPlayer from 'react-player';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
+import ReactPlayer from 'react-player'
 
-const PlayerWrapper = styled.div`
+const Container = styled.div`
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 1080px;
   position: relative;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
-`;
+  margin-inline: auto;
+`
 
-const StyledReactPlayer = styled(ReactPlayer)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const VideoPlayer = ({ url }) => (
-  <PlayerWrapper>
-    <StyledReactPlayer url={url} width="100%" height="100%" controls />
-  </PlayerWrapper>
-);
-
-export default VideoPlayer;
+export default function VideoPlayer({ src }) {
+  return (
+    <Container>
+      <ReactPlayer url={src} playing controls width='100%' height='100%' />
+    </Container>
+  )
+}

@@ -1,33 +1,29 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-const GalleryContainer = styled.div`
+const Gallery = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-`;
+  gap: 1rem;
+  margin-top: 1rem;
 
-const Thumbnail = styled.img`
-  width: 150px;
-  margin: 0 10px;
-  cursor: pointer;
-  border: 2px solid #fff;
-  &:hover {
-    border-color: #f00;
+  video {
+    width: 120px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
-`;
+`
 
-const ThumbnailGallery = ({ thumbnails, onSelect }) => (
-  <GalleryContainer>
-    {thumbnails.map((thumb, index) => (
-      <Thumbnail
-        key={index}
-        src={thumb.image}
-        alt={`Trailer ${index + 1}`}
-        onClick={() => onSelect(thumb.video)}
-      />
-    ))}
-  </GalleryContainer>
-);
-
-export default ThumbnailGallery;
+export default function ThumbnailGallery({ onSelect }) {
+  return (
+    <Gallery>
+      <video src='/videos/trailer1.mp4' onClick={() => onSelect('/videos/trailer1.mp4')} />
+      <video src='/videos/trailer2.mp4' onClick={() => onSelect('/videos/trailer2.mp4')} />
+    </Gallery>
+  )
+}

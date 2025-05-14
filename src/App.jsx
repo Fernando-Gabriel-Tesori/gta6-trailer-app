@@ -1,38 +1,17 @@
-import React, { useState } from 'react';
-import GlobalStyle from './styles/GlobalStyles';
-import LoadingScreen from './components/LoadingScreen';
-import VideoPlayer from './components/VideoPlayer';
-import ThumbnailGallery from './components/ThumbnailGallery';
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import About from './pages/About'
+import Navbar from './components/Navbar'
 
-const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [currentVideo, setCurrentVideo] = useState('/videos/trailer1.mp4');
-
-  const thumbnails = [
-    {
-      image: '/images/loading1.jpg',
-      video: '/videos/trailer1.mp4',
-    },
-    {
-      image: '/images/loading2.jpg',
-      video: '/videos/trailer2.mp4',
-    },
-    // Adicione mais miniaturas conforme necessário
-  ];
-
+export default function App() {
   return (
-    <>
-      <GlobalStyle />
-      {loading ? (
-        <LoadingScreen onFinish={() => setLoading(false)} />
-      ) : (
-        <>
-          <VideoPlayer url={currentVideo} />
-          <ThumbnailGallery thumbnails={thumbnails} onSelect={setCurrentVideo} />
-        </>
-      )}
-    </>
-  );
-};
-
-export default App;
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+      </Routes>
+    </Router>
+  )
+}

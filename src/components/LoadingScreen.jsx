@@ -1,50 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #000;
-`;
-
-const LoadingImage = styled.img`
-  width: 100%;
-  max-width: 800px;
-  object-fit: cover;
-`;
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 const images = [
   '/images/loading1.jpg',
   '/images/loading2.jpg',
-  // Adicione mais imagens conforme necessário
-];
+  '/images/loading3.jpg',
+]
 
-const LoadingScreen = ({ onFinish }) => {
-  const [index, setIndex] = useState(0);
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+`
+
+const LoadingImage = styled(motion.img)`
+  max-width: 90%;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+`
+
+export default function LoadingScreen() {
+  const [imageIndex, setImageIndex] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 1000);
+    const imageCycle = setInterval(() => {
+      setImageIndex((prev) => (prev + 1) % images.length)
+    }, 2000)
 
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
-      onFinish();
-    }, images.length * 1000);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [onFinish]);
+    return () => clearInterval(imageCycle)
+  }, [])
 
   return (
-    <LoadingContainer>
-      <LoadingImage src={images[index]} alt="Loading..." />
-    </LoadingContainer>
-  );
-};
-
-export default LoadingScreen;
+    <Wrapper>
+      <h2>Carregando GTA VI...</h2>
+      <LoadingImage
+        key={images[imageIndex]}
+        src={images[imageIndex]}
+        alt='loading'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+      />
+    </Wrapper>
+  )
+}

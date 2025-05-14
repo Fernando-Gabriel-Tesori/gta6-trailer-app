@@ -1,12 +1,18 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
-  body {
+  *, *::before, *::after {
     margin: 0;
-    background-color: #000;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
   }
-`;
 
-export default GlobalStyle;
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0e0e0e;
+    color: white;
+    overflow-x: hidden;
+  }
+`
+
+export default GlobalStyle
